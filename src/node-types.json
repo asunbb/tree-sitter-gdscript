@@ -12,10 +12,6 @@
         "named": true
       },
       {
-        "type": "binary_operator",
-        "named": true
-      },
-      {
         "type": "call",
         "named": true
       },
@@ -65,10 +61,6 @@
       },
       {
         "type": "true",
-        "named": true
-      },
-      {
-        "type": "unary_operator",
         "named": true
       }
     ]

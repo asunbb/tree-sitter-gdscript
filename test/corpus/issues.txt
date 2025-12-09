@@ -1,4 +1,43 @@
 ============================================
+#75 Incorrect parsing of an attribute in the rhs of a binary operator
+============================================
+
+1.0 - a.abs().dot(a)
+0xFF + a.b.abs()
+!a.b.abs
+
+---
+
+(source
+  (expression_statement
+    (binary_operator
+      (float)
+      (attribute
+        (identifier)
+        (attribute_call
+          (identifier)
+          (arguments))
+        (attribute_call
+          (identifier)
+          (arguments
+            (identifier))))))
+  (expression_statement
+    (binary_operator
+      (integer)
+      (attribute
+        (identifier)
+        (identifier)
+        (attribute_call
+          (identifier)
+          (arguments)))))
+  (expression_statement
+    (unary_operator
+      (attribute
+        (identifier)
+        (identifier)
+        (identifier)))))
+
+============================================
 #67 Parsing error when there are two or more consecutive semicolons
 ============================================
 

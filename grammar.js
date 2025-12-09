@@ -601,7 +601,11 @@ module.exports = grammar({
       prec(
         PREC.attribute_expression,
         choice(
-          $.binary_operator,
+          // Binary op probably shouldn't be in a leading attribute expression.
+          // This causes `1 + a.b.c` to parse as `(1 + a.b).c`
+          //$.binary_operator,
+          // Likewise, unary op does same.
+          // $.unary_operator,
           $.identifier,
           $.string,
           $.integer,
@@ -609,7 +613,6 @@ module.exports = grammar({
           $.true,
           $.false,
           $.null,
-          $.unary_operator,
           $.node_path,
           $.get_node,
           $.subscript,
