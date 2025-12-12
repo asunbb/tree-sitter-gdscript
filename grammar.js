@@ -858,7 +858,7 @@ module.exports = grammar({
         // body, there must be a newline or body_end. _return_type with generic
         // parameters without a newline or body_end will erroneously parse
         // any following lines.
-        choice(seq(":", field("body", $.body)), $._newline, $._body_end),
+        choice(seq(":", field("body", $.body)), ";", $._newline, $._body_end),
       ),
 
     lambda: ($) =>

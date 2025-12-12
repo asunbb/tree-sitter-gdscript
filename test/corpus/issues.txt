@@ -1,4 +1,40 @@
 ============================================
+#76 Parsing error when there is a semicolon at the end of an @abstract function
+============================================
+
+func on_request();
+func on_request() -> void;
+@abstract func on_request();
+@abstract func on_request() -> void;
+
+---
+
+(source
+  (function_definition
+    (name)
+    (parameters))
+  (function_definition
+    (name)
+    (parameters)
+    (type
+      (identifier)))
+  (function_definition
+    (annotations
+      (annotation
+        (identifier)))
+    (name)
+    (parameters))
+  (function_definition
+    (annotations
+      (annotation
+        (identifier)))
+    (name)
+    (parameters)
+    (type
+      (identifier))))
+
+
+============================================
 #75 Incorrect parsing of an attribute in the rhs of a binary operator
 ============================================
 
