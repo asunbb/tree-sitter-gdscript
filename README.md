@@ -5,11 +5,11 @@
 - scm 文件对应修改
 
 用法：
-- 进入 nvim 插件 nvim-treesitter 仓库，修改文件 lua/nvim-treesitter/parsers.lua，GDScript 配置项指向该仓库和最新提交
+- 进入 nvim 插件 nvim-treesitter 仓库，修改文件 lua/nvim-treesitter/parsers.lua，gdscript 配置项指向该仓库和最新提交
 - 启动 nvin，命令行执行 :TSInstall gdscript，nvim-treesitter 自动执行下列操作  
     下载该仓库编译最新解析器 gdscript.so，放置在目录 ~/.local/share/[nvim]/site/parser  
-    创建 ~/.local/share/[nvim]/site/queries/gdscript 指向 nvim-treesitter 仓库内部 GDScript query 路径
-- 修改默认 queries 指向到该仓库 ./scm
+    创建 ~/.local/share/[nvim]/site/queries/gdscript 指向 nvim-treesitter 仓库内部 gdscript query 路径
+- 修改 gdscript query 目录指向该仓库 ./scm
 
 自家用，没有考虑工程上的便利性。
 
