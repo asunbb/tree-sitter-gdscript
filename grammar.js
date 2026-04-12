@@ -83,10 +83,15 @@ module.exports = grammar({
     name: ($) => $._identifier,
     // Code region syntax, parsed to offer code folding support (these are #region and #endregion marks)
     region_start: ($) =>
-      seq(token(prec(100, "#region")), optional($.region_label)),
+      token(prec(100, seq("#region", /([ \t]+[^\r\n]*)?/))),
     region_end: ($) =>
-      token(seq(prec(100, "#endregion"), optional(/[^\r\n]*/))),
-    region_label: ($) => /[^\r\n]+/,
+      token(prec(100, seq("#endregion", optional(/[^\r\n]*/)))),
+    region: ($) =>
+      seq(
+        $.region_start,
+        repeat($._statement),
+        $.region_end,
+      ),
     comment: ($) => token(seq("#", /.*/)),
     true: ($) => "true",
     false: ($) => "false",
@@ -232,8 +237,6 @@ module.exports = grammar({
         $.break_statement,
         $.breakpoint_statement,
         $.continue_statement,
-        $.region_start,
-        $.region_end,
       ),
 
     expression_statement: ($) =>
@@ -390,6 +393,7 @@ module.exports = grammar({
         $.class_definition,
         $.enum_definition,
         $.match_statement,
+        $.region,
       ),
 
     if_statement: ($) =>
@@ -468,12 +472,10 @@ module.exports = grammar({
         $.pass_statement,
         $.signal_statement,
         $.variable_statement,
-        $.region_start,
-        $.region_end,
       ),
 
     _compound_class_member: ($) =>
-      choice($.class_definition, $.enum_definition, $.function_definition),
+      choice($.class_definition, $.enum_definition, $.function_definition, $.region),
 
     // -- Enum
     enum_definition: ($) =>

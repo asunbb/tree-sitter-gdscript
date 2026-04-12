@@ -8,9 +8,9 @@ Region: Empty region
 ---
 
 (source
-  (region_start
-    (region_label))
-  (region_end))
+  (region
+    (region_start)
+    (region_end)))
 
 =====================================
 Region: Basic anonymous region with code
@@ -24,13 +24,14 @@ func _ready() -> void:
 ---
 
 (source
-  (region_start)
-  (function_definition
-    (name)
-    (parameters)
-    (type (identifier))
-    (body (pass_statement)))
-  (region_end))
+  (region
+    (region_start)
+    (function_definition
+      (name)
+      (parameters)
+      (type (identifier))
+      (body (pass_statement)))
+    (region_end)))
 
 =====================================
 Region: Named region with more code
@@ -44,23 +45,23 @@ func _process(delta: float) -> void:
 ---
 
 (source
-  (region_start
-    (region_label))
-  (function_definition
-    (name)
-    (parameters
-      (typed_parameter
-        (identifier)
-        (type (identifier))))
-    (type (identifier))
-    (body
-      (expression_statement
-        (augmented_assignment
+  (region
+    (region_start)
+    (function_definition
+      (name)
+      (parameters
+        (typed_parameter
           (identifier)
-          (binary_operator
+          (type (identifier))))
+      (type (identifier))
+      (body
+        (expression_statement
+          (augmented_assignment
             (identifier)
-            (identifier))))))
-  (region_end))
+            (binary_operator
+              (identifier)
+              (identifier))))))
+    (region_end)))
 
 =====================================
 Region: Region with leading indentation
@@ -82,10 +83,10 @@ func _physics_process(delta: float) -> void:
         (type (identifier))))
     (type (identifier))
     (body
-      (region_start
-        (region_label))
-     (pass_statement)
-      (region_end))))
+      (region
+        (region_start)
+        (pass_statement)
+        (region_end)))))
 
 =====================================
 Region: Two sibling regions
@@ -104,33 +105,33 @@ func take_damage(amount) -> void:
 ---
 
 (source
-  (region_start
-    (region_label))
-  (variable_statement
-    (name)
-    (type
-      (identifier))
-    (integer))
-  (variable_statement
-    (name)
-    (type
-      (identifier))
-    (float))
-  (region_end)
-  (region_start
-    (region_label))
-  (function_definition
-    (name)
-    (parameters
-      (identifier))
-    (type
-      (identifier))
-    (body
-      (expression_statement
-        (augmented_assignment
-          (identifier)
-          (identifier)))))
-  (region_end))
+  (region
+    (region_start)
+    (variable_statement
+      (name)
+      (type
+        (identifier))
+      (integer))
+    (variable_statement
+      (name)
+      (type
+        (identifier))
+      (float))
+    (region_end))
+  (region
+    (region_start)
+    (function_definition
+      (name)
+      (parameters
+        (identifier))
+      (type
+        (identifier))
+      (body
+        (expression_statement
+          (augmented_assignment
+            (identifier)
+            (identifier)))))
+    (region_end)))
 
 =====================================
 Region: Region inside a class body
@@ -148,15 +149,15 @@ class MyClass:
   (class_definition
     name: (name)
     body: (class_body
-      (region_start
-        (region_label))
-      (variable_statement
-        name: (name)
-        value: (integer))
-      (variable_statement
-        name: (name)
-        value: (integer))
-      (region_end))))
+      (region
+        (region_start)
+        (variable_statement
+          name: (name)
+          value: (integer))
+        (variable_statement
+          name: (name)
+          value: (integer))
+        (region_end)))))
 
 =====================================
 Region: Region inside a match body
@@ -174,8 +175,7 @@ match x:
   (match_statement
     value: (identifier)
     body: (match_body
-      (region_start
-        (region_label))
+      (region_start)
       (pattern_section
         (integer)
         body: (body

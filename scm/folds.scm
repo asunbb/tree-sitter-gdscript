@@ -14,6 +14,7 @@
   (function_definition)
   (lambda)
   (constructor_definition)
+  (region)
 ] @fold
 
 ; It's nice to be able to fold the if/elif/else clauses and the entire
