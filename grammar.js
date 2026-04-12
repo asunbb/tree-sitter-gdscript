@@ -468,6 +468,8 @@ module.exports = grammar({
         $.pass_statement,
         $.signal_statement,
         $.variable_statement,
+        $.region_start,
+        $.region_end,
       ),
 
     _compound_class_member: ($) =>
@@ -520,9 +522,13 @@ module.exports = grammar({
         // as match blocks are expressions, we need to explicitly allow them
         // here. The pattern section body itself supports statements (thus annotations).
         repeat1(
-          seq(
-            optional(repeat(seq($.annotation, optional($._newline)))),
-            $.pattern_section,
+          choice(
+            seq($.region_start, $._newline),
+            seq($.region_end, $._newline),
+            seq(
+              optional(repeat(seq($.annotation, optional($._newline)))),
+              $.pattern_section,
+            ),
           ),
         ),
         $._dedent,

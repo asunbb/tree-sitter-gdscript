@@ -131,3 +131,53 @@ func take_damage(amount) -> void:
           (identifier)
           (identifier)))))
   (region_end))
+
+=====================================
+Region: Region inside a class body
+=====================================
+
+class MyClass:
+    #region vars
+    var x = 1
+    var y = 2
+    #endregion
+
+---
+
+(source
+  (class_definition
+    name: (name)
+    body: (class_body
+      (region_start
+        (region_label))
+      (variable_statement
+        name: (name)
+        value: (integer))
+      (variable_statement
+        name: (name)
+        value: (integer))
+      (region_end))))
+
+=====================================
+Region: Region inside a match body
+=====================================
+
+match x:
+    #region patterns
+    1:
+        pass
+    #endregion
+
+---
+
+(source
+  (match_statement
+    value: (identifier)
+    body: (match_body
+      (region_start
+        (region_label))
+      (pattern_section
+        (integer)
+        body: (body
+          (pass_statement)))
+      (region_end))))

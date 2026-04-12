@@ -850,6 +850,14 @@
           "named": true
         },
         {
+          "type": "region_end",
+          "named": true
+        },
+        {
+          "type": "region_start",
+          "named": true
+        },
+        {
           "type": "signal_statement",
           "named": true
         },
@@ -1649,6 +1657,14 @@
         },
         {
           "type": "pattern_section",
+          "named": true
+        },
+        {
+          "type": "region_end",
+          "named": true
+        },
+        {
+          "type": "region_start",
           "named": true
         }
       ]
