@@ -1,0 +1,311 @@
+================================================================================
+Not Precedence: not with comparison operators
+================================================================================
+
+not a == b
+not a != b
+not a < b
+not a > b
+not a <= b
+not a >= b
+
+---
+
+(source
+  (expression_statement
+    (not_operator
+      (binary_operator
+        left: (identifier)
+        right: (identifier))))
+  (expression_statement
+    (not_operator
+      (binary_operator
+        left: (identifier)
+        right: (identifier))))
+  (expression_statement
+    (not_operator
+      (binary_operator
+        left: (identifier)
+        right: (identifier))))
+  (expression_statement
+    (not_operator
+      (binary_operator
+        left: (identifier)
+        right: (identifier))))
+  (expression_statement
+    (not_operator
+      (binary_operator
+        left: (identifier)
+        right: (identifier))))
+  (expression_statement
+    (not_operator
+      (binary_operator
+        left: (identifier)
+        right: (identifier)))))
+
+================================================================================
+Not Precedence: not with boolean operators
+================================================================================
+
+not a and b
+not a or b
+not a and b or c
+not a or b and c
+
+---
+
+(source
+  (expression_statement
+    (binary_operator
+      left: (not_operator
+        (identifier))
+      right: (identifier)))
+  (expression_statement
+    (binary_operator
+      left: (not_operator
+        (identifier))
+      right: (identifier)))
+  (expression_statement
+    (binary_operator
+      left: (binary_operator
+        left: (not_operator
+          (identifier))
+        right: (identifier))
+      right: (identifier)))
+  (expression_statement
+    (binary_operator
+      left: (not_operator
+        (identifier))
+      right: (binary_operator
+        left: (identifier)
+        right: (identifier)))))
+
+================================================================================
+Not Precedence: not with in and is operators
+================================================================================
+
+not a in b
+not a is T
+
+---
+
+(source
+  (expression_statement
+    (not_operator
+      (binary_operator
+        left: (identifier)
+        right: (identifier))))
+  (expression_statement
+    (not_operator
+      (binary_operator
+        left: (identifier)
+        right: (identifier)))))
+
+================================================================================
+Not Precedence: nested not operators
+================================================================================
+
+not not a
+not !a
+
+---
+
+(source
+  (expression_statement
+    (not_operator
+      (not_operator
+        (identifier))))
+  (expression_statement
+    (not_operator
+      (not_operator
+        (identifier)))))
+
+================================================================================
+Not Precedence: not with arithmetic and comparison
+================================================================================
+
+not a + b == c
+not a * b > c and d
+not a == b and c == d
+
+---
+
+(source
+  (expression_statement
+    (not_operator
+      (binary_operator
+        left: (binary_operator
+          left: (identifier)
+          right: (identifier))
+        right: (identifier))))
+  (expression_statement
+    (binary_operator
+      left: (not_operator
+        (binary_operator
+          left: (binary_operator
+            left: (identifier)
+            right: (identifier))
+          right: (identifier)))
+      right: (identifier)))
+  (expression_statement
+    (binary_operator
+      left: (not_operator
+        (binary_operator
+          left: (identifier)
+          right: (identifier)))
+      right: (binary_operator
+        left: (identifier)
+        right: (identifier)))))
+
+================================================================================
+Not Precedence: parenthesized and await
+================================================================================
+
+not (a == b)
+not await foo()
+not a == b == c
+
+---
+
+(source
+  (expression_statement
+    (not_operator
+      (parenthesized_expression
+        (binary_operator
+          left: (identifier)
+          right: (identifier)))))
+  (expression_statement
+    (not_operator
+      (await_expression
+        (call
+          (identifier)
+          arguments: (arguments)))))
+  (expression_statement
+    (not_operator
+      (binary_operator
+        left: (binary_operator
+          left: (identifier)
+          right: (identifier))
+        right: (identifier)))))
+
+================================================================================
+Not Precedence: not with as operator
+================================================================================
+
+not a as int
+
+---
+
+(source
+  (expression_statement
+    (not_operator
+      (binary_operator
+        left: (identifier)
+        right: (identifier)))))
+
+================================================================================
+Not Precedence: not with literals
+================================================================================
+
+not true
+not false
+not null == a
+
+---
+
+(source
+  (expression_statement
+    (not_operator
+      (true)))
+  (expression_statement
+    (not_operator
+      (false)))
+  (expression_statement
+    (not_operator
+      (binary_operator
+        left: (null)
+        right: (identifier)))))
+
+================================================================================
+Not Precedence: not with member access and subscript
+================================================================================
+
+not a.b == c
+not a[0] == b
+
+---
+
+(source
+  (expression_statement
+    (not_operator
+      (binary_operator
+        left: (attribute
+          (identifier)
+          (identifier))
+        right: (identifier))))
+  (expression_statement
+    (not_operator
+      (binary_operator
+        left: (subscript
+          (identifier)
+          arguments: (subscript_arguments
+            (integer)))
+        right: (identifier)))))
+
+================================================================================
+Not Precedence: not with unary operators
+================================================================================
+
+not -a == b
+not ~a == b
+
+---
+
+(source
+  (expression_statement
+    (not_operator
+      (binary_operator
+        left: (unary_operator
+          (identifier))
+        right: (identifier))))
+  (expression_statement
+    (not_operator
+      (binary_operator
+        left: (unary_operator
+          (identifier))
+        right: (identifier)))))
+
+================================================================================
+Not Precedence: bang operator (!)
+================================================================================
+
+!a == b
+!a and b
+!a or b
+!a == b and c
+
+---
+
+(source
+  (expression_statement
+    (not_operator
+      (binary_operator
+        left: (identifier)
+        right: (identifier))))
+  (expression_statement
+    (binary_operator
+      left: (not_operator
+        (identifier))
+      right: (identifier)))
+  (expression_statement
+    (binary_operator
+      left: (not_operator
+        (identifier))
+      right: (identifier)))
+  (expression_statement
+    (binary_operator
+      left: (not_operator
+        (binary_operator
+          left: (identifier)
+          right: (identifier)))
+      right: (identifier))))

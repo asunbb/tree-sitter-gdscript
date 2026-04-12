@@ -47,9 +47,9 @@ not x and (!x)
           (true)))))
   (expression_statement
     (binary_operator
-      (unary_operator (identifier))
+      (not_operator (identifier))
       (parenthesized_expression
-        (unary_operator (identifier))))))
+        (not_operator (identifier))))))
 
 =====================================
 Operators Is
@@ -255,7 +255,7 @@ not await test()
 
 (source
   (expression_statement
-    (unary_operator
+    (not_operator
       (await_expression
         (call (identifier) (arguments))))))
 

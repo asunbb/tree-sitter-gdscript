@@ -5,22 +5,23 @@ const PREC = {
   parenthesized_expression: 1,
   or: 3,
   and: 4,
-  in: 5,
-  compare: 6,
-  bitwise_or: 7,
-  bitwise_and: 8,
-  xor: 9,
-  shift: 10,
-  plus: 11,
-  times: 12,
-  power: 13,
-  unary: 14,
-  is: 15,
-  as: 16,
-  call: 17,
-  attribute: 18,
-  attribute_expression: 19,
-  type: 20,
+  boolean_not: 5,
+  in: 6,
+  compare: 7,
+  bitwise_or: 8,
+  bitwise_and: 9,
+  xor: 10,
+  shift: 11,
+  plus: 12,
+  times: 13,
+  power: 14,
+  unary: 15,
+  is: 16,
+  as: 17,
+  call: 18,
+  attribute: 19,
+  attribute_expression: 20,
+  type: 21,
 };
 
 module.exports = grammar({
@@ -587,6 +588,7 @@ module.exports = grammar({
         $.true,
         $.false,
         $.null,
+        $.not_operator,
         $.unary_operator,
         $.string_name,
         $.node_path,
@@ -679,9 +681,11 @@ module.exports = grammar({
       return choice(...choices);
     },
 
+    not_operator: ($) =>
+      prec(PREC.boolean_not, seq(choice("not", "!"), $._primary_expression)),
+
     unary_operator: ($) =>
       choice(
-        prec(PREC.unary, seq(choice("not", "!"), $._primary_expression)),
         prec(PREC.unary, seq("-", $._primary_expression)),
         prec(PREC.unary, seq("+", $._primary_expression)),
         prec(PREC.unary, seq("~", $._primary_expression)),

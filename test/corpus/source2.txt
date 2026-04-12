@@ -150,7 +150,7 @@ x is (not T)
 (source
   (expression_statement (binary_operator (identifier) (identifier)))
   (expression_statement (binary_operator (identifier) (identifier)))
-  (expression_statement (binary_operator (identifier) (parenthesized_expression (unary_operator (identifier))))))
+  (expression_statement (binary_operator (identifier) (parenthesized_expression (not_operator (identifier))))))
 
 ============================================
 In And Not In Test
@@ -172,7 +172,7 @@ not (x in y)
       (identifier)
       (identifier)))
   (expression_statement
-    (unary_operator
+    (not_operator
       (parenthesized_expression
         (binary_operator
           (identifier)

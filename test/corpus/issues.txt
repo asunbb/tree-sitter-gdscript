@@ -67,7 +67,7 @@ func on_request() -> void;
           (identifier)
           (arguments)))))
   (expression_statement
-    (unary_operator
+    (not_operator
       (attribute
         (identifier)
         (identifier)
