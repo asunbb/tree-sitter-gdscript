@@ -3,6 +3,7 @@
 - 修正内部类的 region 定义干扰 fold 解析
 - 新增 region 可折叠
 - scm 文件对应修改
+- 修正 not/! 优先级
 
 用法：
 - 进入 nvim 插件 nvim-treesitter 仓库，修改文件 lua/nvim-treesitter/parsers.lua，gdscript 配置项指向该仓库和最新提交
