@@ -47,6 +47,23 @@
 (class_name_statement
   (name) @type) @keyword
 
+(class_definition
+  (name) @type)
+
+; We'll use @property since that's the term Godot uses.
+; But, should (source (variable_statement (name))) be @property, too? Since a
+; script file is a class in gdscript.
+(class_definition
+  (class_body
+    (variable_statement
+      (name) @property)))
+
+; Same question but for methods?
+(class_definition
+  (class_body
+    (function_definition
+      (name) @function.method)))
+
 (const_statement
   "const" @keyword.modifier
   (name) @constant)
@@ -79,21 +96,6 @@
 (call
   (identifier) @keyword.import
   (#any-of? @keyword.import "preload" "load"))
-
-; Properties and Methods
-; We'll use @property since that's the term Godot uses.
-; But, should (source (variable_statement (name))) be @property, too? Since a
-; script file is a class in gdscript.
-(class_definition
-  (class_body
-    (variable_statement
-      (name) @property)))
-
-; Same question but for methods?
-(class_definition
-  (class_body
-    (function_definition
-      (name) @function.method)))
 
 (attribute_call
   (identifier) @function.method.call)
