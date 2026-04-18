@@ -48,8 +48,26 @@ function M.setup(opts)
     end,
   })
 
-  -- 将 filetype "gdscript" 映射到 parser 名 "gdscript_n"
+  -- 注册 filetype → parser 映射关系
+  -- Neovim 默认将 filetype "gdscript" 映射到同名 parser "gdscript"，
+  -- 但我们的 parser 名为 "gdscript_n"（与 nvim-treesitter 内置的 gdscript 区分），
+  -- 因此需要显式注册，告知 Neovim 对 gdscript filetype 使用 gdscript_n parser。
   vim.treesitter.language.register("gdscript_n", { "gdscript" })
+
+  -- 注册 FileType autocommand，当打开 .gd 文件时自动启动 treesitter
+  -- Neovim 不会自动为自定义 parser 名调用 vim.treesitter.start()，
+  -- 必须手动监听 FileType 事件并显式启动，否则 parser 和查询文件虽已就绪但不会生效。
+  -- 参数说明：
+  --   group：使用独立 augroup，clear = true 防止重复注册
+  --   pattern：匹配 filetype 为 "gdscript" 的 buffer
+  --   callback：对该 buffer 启动 treesitter，指定 parser 名 "gdscript_n"
+  vim.api.nvim_create_autocmd("FileType", {
+    group = vim.api.nvim_create_augroup("gdscript_n_treesitter", { clear = true }),
+    pattern = "gdscript",
+    callback = function(args)
+      vim.treesitter.start(args.buf, "gdscript_n")
+    end,
+  })
 end
 
 return M
