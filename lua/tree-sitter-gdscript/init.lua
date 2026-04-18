@@ -36,11 +36,13 @@ function M.setup(opts)
         install_info = {
           -- 本地 parser 路径，使用插件根目录（包含 grammar.js、src/ 等文件）
           path = M.get_root(),
-          -- generate = false：src/parser.c 已包含在仓库中，无需从 grammar.js 重新生成
-          generate = false,
+          -- generate = true：需要从 grammar.js 生成 parser.c（因为仓库不提交预编译产物）
+          generate = true,
+          -- generate_from_json = false：不使用 grammar.json 生成，而是从 grammar.js 完整生成
+          generate_from_json = false,
           -- queries：指定查询文件目录（相对于插件根目录），
           -- Neovim 通过 runtimepath 的 queries/<language>/*.scm 发现查询
-          queries = "queries",
+          queries = "queries/gdscript_n",
         },
       }
     end,
