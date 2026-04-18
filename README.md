@@ -3,7 +3,8 @@
 
 基于 [prestonknopp/tree-sitter-gdscript](https://github.com/prestonknopp/tree-sitter-gdscript) 改进：
 
-- 项目结构重构为 neovim 插件，以本地数据源的方式提供基于 nvim-treesitter 的解析器安装
+- 项目组织重构为 neovim 插件，以本地数据源的方式提供基于 nvim-treesitter 的解析器安装
+- 移除不使用的语言 binding
 - 修正内部类的 region 定义干扰 fold 解析
 - 新增 Region 可折叠（`#region` / `#endregion`）
 - 修正 `not` / `!` 优先级
@@ -54,6 +55,8 @@ npm run format
 ## 注意事项
 
 初版 scm 文件来源于 nvim-treesitter 仓库，之后会酌情改进。
+
+若安装 nvim-treesitter 提供的 gdscript 解析器，该仓库检出到本地会因为项目名字相同而产生冲突。
 
 ## License
 
