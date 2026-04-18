@@ -1,75 +1,79 @@
+# tree-sitter-gdscript
 
-改进：
+GDScript (Godot) grammar for [tree-sitter](https://github.com/tree-sitter/tree-sitter), packaged as a Neovim plugin.
+
+基于 [prestonknopp/tree-sitter-gdscript](https://github.com/prestonknopp/tree-sitter-gdscript) v6.1.0，增加了：
+
+- Region 可折叠（`#region` / `#endregion`）
+- 修正 `not` / `!` 优先级
 - 修正内部类的 region 定义干扰 fold 解析
-- 新增 region 可折叠
-- scm 文件对应修改
-- 修正 not/! 优先级
+- 丰富的 Godot 内置类型、函数、常量高亮
 
-用法：
-- 进入 nvim 插件 nvim-treesitter 仓库，修改文件 lua/nvim-treesitter/parsers.lua，gdscript 配置项指向该仓库和最新提交
-- 启动 nvin，命令行执行 :TSInstall gdscript，nvim-treesitter 自动执行下列操作  
-    下载该仓库编译最新解析器 gdscript.so，放置在目录 ~/.local/share/[nvim]/site/parser  
-    创建 ~/.local/share/[nvim]/site/queries/gdscript 指向 nvim-treesitter 仓库内部 gdscript query 路径
-- 修改 gdscript query 目录指向该仓库 ./scm
+## 安装
 
-自家用，没有考虑工程上的便利性。
+### lazy.nvim
 
----
-
-tree-sitter-gdscript
-====================
-
-GDScript grammar for [tree-sitter][].
-
-- https://www.npmjs.com/package/tree-sitter-gdscript
-- https://crates.io/crates/tree-sitter-gdscript
-
-## Latest Godot Commit Syntactically Synced
-
-Note: *Some commits may have been missed.*
-
-```bash
-git log --oneline --no-merges modules/gdscript
+```lua
+{
+  "your-username/tree-sitter-gdscript",
+  build = "make",
+  lazy = false,
+}
 ```
 
-[6ae54fd787](https://github.com/godotengine/godot/commits/6ae54fd787)
+### packer.nvim
 
-## How To
+```lua
+use {
+  "your-username/tree-sitter-gdscript",
+  run = "make",
+}
+```
 
-- Test grammar
-  1. `npm run genTest`
-- Test scanner
-  1. Edit "src/scanner.c"
-  1. `npm run test`, no need to generate.
-- Build prebuilds
-  1. `npm run genTest`
-  1. `npm run prebuild`
-- Build with node-gyp
-  1. `npm run genTest`
-  1. `npm install node-gyp`
-  1. `node-gyp rebuild`
-- Edit
-  1. Write tests in corpus to express behavior.
-  1. Make grammar or scanner edits.
-  1. See above for running tests.
-  1. `npm run format`
-  1. Commit changes.
-     - If commit is an issue fix, prefix message with `fix #<issue-number>:`
-     - List the rules changed in commit message.
-     - Note what rules need to be updated in [nvim-treesitter][] queries.
-  1. Commit generated files with the latest non-wip commit.
-  1. Push
-- Release
-  1. Manually edit version in package files: CMakeLists.txt, Cargo.toml,
-     Makefile, pyproject.toml, tree-sitter.json
-  1. `npm version --git-tag-version false <major, minor, patch>`
-  1. `git tag -a v<version>`
-  1. `git push && git push --tags`
-  1. `cargo package`
-  1. `cargo publish`
+### 手动安装
 
-Note: `node-gyp-build` will check for binaries in both `build` and `prebuilds`
-directories.
+```bash
+cd ~/.local/share/nvim/site/pack/plugins/start/
+git clone https://github.com/your-username/tree-sitter-gdscript.git
+cd tree-sitter-gdscript
+make
+```
 
-[tree-sitter]: https://github.com/tree-sitter/tree-sitter
-[nvim-treesitter]: https://github.com/nvim-treesitter/nvim-treesitter
+## 构建要求
+
+- C 编译器（cc / gcc / clang）
+- （可选）Node.js + tree-sitter CLI：用于语法开发
+
+## 使用
+
+安装后自动生效。打开 `.gd` 文件即可获得：
+
+- 语法高亮（含 500+ Godot 内置类、150+ 内置函数、600+ 内置常量）
+- 代码折叠（if/for/while/class/match/function/region）
+- 缩进
+- 代码导航（go to definition）
+- 注入（注释拼写检查）
+
+## 语法开发
+
+```bash
+# 修改 grammar.js 后，重新生成并测试
+make generate && make test
+
+# 仅修改 src/scanner.c 时，直接测试
+make test
+
+# 编译 parser
+make
+
+# 格式化
+npm run format
+```
+
+## Godot 同步版本
+
+语法同步至 Godot commit [6ae54fd787](https://github.com/godotengine/godot/commits/6ae54fd787)。
+
+## License
+
+MIT
