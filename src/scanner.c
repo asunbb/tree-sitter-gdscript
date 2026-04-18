@@ -237,7 +237,7 @@ static inline void handle_quote(TSLexer *lexer, Delimiter *delimiter, char quote
     }
 }
 
-bool tree_sitter_gdscript_external_scanner_scan(void *payload, TSLexer *lexer,
+bool tree_sitter_gdscript_n_external_scanner_scan(void *payload, TSLexer *lexer,
                                                 const bool *valid_symbols) {
     Scanner *scanner = (Scanner *)payload;
 
@@ -544,7 +544,7 @@ bool tree_sitter_gdscript_external_scanner_scan(void *payload, TSLexer *lexer,
     return false;
 }
 
-unsigned tree_sitter_gdscript_external_scanner_serialize(void *payload,
+unsigned tree_sitter_gdscript_n_external_scanner_serialize(void *payload,
                                                          char *buffer) {
     Scanner *scanner = (Scanner *)payload;
 
@@ -570,7 +570,7 @@ unsigned tree_sitter_gdscript_external_scanner_serialize(void *payload,
     return size;
 }
 
-void tree_sitter_gdscript_external_scanner_deserialize(void *payload,
+void tree_sitter_gdscript_n_external_scanner_deserialize(void *payload,
                                                        const char *buffer,
                                                        unsigned length) {
     Scanner *scanner = (Scanner *)payload;
@@ -599,7 +599,7 @@ void tree_sitter_gdscript_external_scanner_deserialize(void *payload,
     }
 }
 
-void *tree_sitter_gdscript_external_scanner_create() {
+void *tree_sitter_gdscript_n_external_scanner_create() {
 #if defined(__STDC_VERSION__) && (__STDC_VERSION__ >= 201112L)
     _Static_assert(sizeof(Delimiter) == sizeof(char), "");
 #else
@@ -614,11 +614,11 @@ void *tree_sitter_gdscript_external_scanner_create() {
 
     scanner->indents = calloc(1, sizeof(indent_vec));
     scanner->delimiters = calloc(1, sizeof(delimiter_vec));
-    tree_sitter_gdscript_external_scanner_deserialize(scanner, NULL, 0);
+    tree_sitter_gdscript_n_external_scanner_deserialize(scanner, NULL, 0);
     return scanner;
 }
 
-void tree_sitter_gdscript_external_scanner_destroy(void *payload) {
+void tree_sitter_gdscript_n_external_scanner_destroy(void *payload) {
     Scanner *scanner = (Scanner *)payload;
     VEC_FREE(scanner->indents);
     VEC_FREE(scanner->delimiters);

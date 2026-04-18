@@ -1,13 +1,13 @@
 {
   "grammars": [
     {
-      "name": "gdscript",
-      "camelcase": "GDScript",
-      "scope": "source.gdscript",
+      "name": "gdscript_n",
+      "camelcase": "GDScriptN",
+      "scope": "source.gdscript_n",
       "file-types": [
         ".gd"
       ],
-      "injection-regex": "^gdscript$"
+      "injection-regex": "^gdscript_n$"
     }
   ],
   "metadata": {

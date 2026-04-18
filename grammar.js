@@ -25,7 +25,7 @@ const PREC = {
 };
 
 module.exports = grammar({
-  name: "gdscript",
+  name: "gdscript_n",
 
   word: ($) => $._identifier,
 

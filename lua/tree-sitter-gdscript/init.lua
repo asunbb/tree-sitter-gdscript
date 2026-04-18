@@ -1,5 +1,6 @@
 --- tree-sitter-gdscript — GDScript 语法插件的 Lua 模块
---- 将 GDScript 解析器注册为 nvim-treesitter 本地 parser 源，
+--- 将 GDScript 解析器（gdscript-n）注册为 nvim-treesitter 本地 parser 源，
+--- 与 nvim-treesitter 内置的 gdscript 解析器区分。
 --- 安装/更新由 nvim-treesitter 框架的标准流程处理。
 
 local M = {}
@@ -14,8 +15,8 @@ function M.get_root()
 end
 
 --- 插件初始化入口
---- 1. 注册 TSUpdate autocommand，在 nvim-treesitter 安装时注入 gdscript parser 信息
---- 2. 将 Neovim 的 gdscript filetype 映射到 gdscript parser
+--- 1. 注册 TSUpdate autocommand，在 nvim-treesitter 安装时注入 gdscript-n parser 信息
+--- 2. 将 Neovim 的 gdscript filetype 映射到 gdscript-n parser
 ---@param opts table|nil 预留配置项（暂未使用）
 function M.setup(opts)
   opts = opts or {}
@@ -31,7 +32,7 @@ function M.setup(opts)
       if not ok then
         return
       end
-      ts_parsers.gdscript = {
+      ts_parsers["gdscript_n"] = {
         install_info = {
           -- 本地 parser 路径，使用插件根目录（包含 grammar.js、src/ 等文件）
           path = M.get_root(),
@@ -45,8 +46,8 @@ function M.setup(opts)
     end,
   })
 
-  -- 将 filetype "gdscript" 映射到 parser 名 "gdscript"
-  vim.treesitter.language.register("gdscript", { "gdscript" })
+  -- 将 filetype "gdscript" 映射到 parser 名 "gdscript_n"
+  vim.treesitter.language.register("gdscript_n", { "gdscript" })
 end
 
 return M

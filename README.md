@@ -26,7 +26,7 @@ GDScript (Godot) grammar for [tree-sitter](https://github.com/tree-sitter/tree-s
 }
 ```
 
-安装后执行 `:TSInstall gdscript`，nvim-treesitter 会自动编译 parser 并部署查询文件。
+安装后执行 `:TSInstall gdscript_n`，nvim-treesitter 会自动编译 parser 并部署查询文件。
 
 ### 手动安装
 
@@ -35,8 +35,8 @@ GDScript (Godot) grammar for [tree-sitter](https://github.com/tree-sitter/tree-s
 cd ~/.local/share/nvim/site/pack/plugins/start/
 git clone https://github.com/your-username/tree-sitter-gdscript.git
 
-# 在 Neovim 中执行
-:TSInstall gdscript
+# 在 Neovim 中执行（解析器名为 gdscript_n，与内置 gdscript 区分）
+:TSInstall gdscript_n
 ```
 
 ## 使用
