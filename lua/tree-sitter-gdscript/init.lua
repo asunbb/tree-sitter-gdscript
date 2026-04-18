@@ -42,7 +42,7 @@ function M.setup(opts)
           generate_from_json = false,
           -- queries：指定查询文件目录（相对于插件根目录），
           -- Neovim 通过 runtimepath 的 queries/<language>/*.scm 发现查询
-          queries = "queries/gdscript_n",
+          queries = "queries",
         },
       }
     end,
