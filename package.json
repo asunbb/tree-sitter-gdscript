@@ -1,9 +1,9 @@
 {
   "name": "tree-sitter-gdscript",
-  "version": "6.1.0",
-  "description": "GDScript grammar for Neovim tree-sitter",
+  "version": "0.1.0",
+  "description": "GDScript grammar for Neovim tree-sitter next",
   "license": "MIT",
-  "author": "Preston Knopp",
+  "author": ["Preston Knopp", "asunbb"]
   "keywords": [
     "tree-sitter",
     "gdscript",
