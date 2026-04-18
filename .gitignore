@@ -1,26 +1,10 @@
-# Neovim parser（编译产物）
-parser/*.so
-parser/*.dylib
-parser/*.dll
-
 # Node（tree-sitter CLI 开发用）
 node_modules/
 build/
 package-lock.json
 
-# Rust
+# Rust（仅开发时残留）
 target/
-
-# C
-*.o
-*.a
 
 # OS
 .DS_Store
-
-# 其他构建产物
-*.wasm
-*.pc
-*.tar.gz
-*.tgz
-*.zip

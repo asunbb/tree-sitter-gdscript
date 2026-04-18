@@ -1,6 +1,6 @@
 # tree-sitter-gdscript
 
-GDScript (Godot) grammar for [tree-sitter](https://github.com/tree-sitter/tree-sitter), packaged as a Neovim plugin.
+GDScript (Godot) grammar for [tree-sitter](https://github.com/tree-sitter/tree-sitter)，作为 nvim-treesitter 本地 parser 插件使用。
 
 基于 [prestonknopp/tree-sitter-gdscript](https://github.com/prestonknopp/tree-sitter-gdscript) v6.1.0，增加了：
 
@@ -11,38 +11,33 @@ GDScript (Godot) grammar for [tree-sitter](https://github.com/tree-sitter/tree-s
 
 ## 安装
 
+依赖 [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)，由其负责编译 parser。
+
 ### lazy.nvim
 
 ```lua
 {
+  "nvim-treesitter/nvim-treesitter",
+  build = ":TSUpdate",
+},
+{
   "your-username/tree-sitter-gdscript",
-  build = "make",
   lazy = false,
 }
 ```
 
-### packer.nvim
-
-```lua
-use {
-  "your-username/tree-sitter-gdscript",
-  run = "make",
-}
-```
+安装后执行 `:TSInstall gdscript`，nvim-treesitter 会自动编译 parser 并部署查询文件。
 
 ### 手动安装
 
 ```bash
+# 将插件放入 runtimepath
 cd ~/.local/share/nvim/site/pack/plugins/start/
 git clone https://github.com/your-username/tree-sitter-gdscript.git
-cd tree-sitter-gdscript
-make
+
+# 在 Neovim 中执行
+:TSInstall gdscript
 ```
-
-## 构建要求
-
-- C 编译器（cc / gcc / clang）
-- （可选）Node.js + tree-sitter CLI：用于语法开发
 
 ## 使用
 
@@ -57,18 +52,23 @@ make
 ## 语法开发
 
 ```bash
+# 安装依赖
+npm install
+
 # 修改 grammar.js 后，重新生成并测试
-make generate && make test
+npm run genTest
 
 # 仅修改 src/scanner.c 时，直接测试
-make test
-
-# 编译 parser
-make
+npm run test
 
 # 格式化
 npm run format
 ```
+
+## 工作原理
+
+插件通过 `User TSUpdate` autocommand 将本地 parser 信息注入 nvim-treesitter 的 parser 注册表，
+包括 grammar 源码路径和查询文件目录。编译和安装由 nvim-treesitter 的标准流程处理。
 
 ## Godot 同步版本
 
