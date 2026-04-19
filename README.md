@@ -1,4 +1,7 @@
+
 # tree-sitter-gdscript
+
+[简体中文](README.zh-CN.md)
 
 Improved fork of [prestonknopp/tree-sitter-gdscript](https://github.com/prestonknopp/tree-sitter-gdscript):
 

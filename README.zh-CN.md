@@ -1,6 +1,8 @@
 
 # tree-sitter-gdscript
 
+[英文](README.md)
+
 基于 [prestonknopp/tree-sitter-gdscript](https://github.com/prestonknopp/tree-sitter-gdscript) 改进：
 
 - 项目组织重构为 neovim 插件，以本地数据源的方式提供基于 nvim-treesitter 的解析器安装
