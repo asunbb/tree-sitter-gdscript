@@ -58,7 +58,7 @@ npm run format
 
 初版 scm 文件来源于 nvim-treesitter 仓库，之后会酌情改进。
 
-若安装 nvim-treesitter 提供的 gdscript 解析器，该仓库检出到本地会因为项目名字相同而产生冲突。
+若同时安装 nvim-treesitter 提供的 gdscript 解析器，该仓库检出到本地会因为项目名字相同而产生冲突。
 
 ## License
 
