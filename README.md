@@ -1,7 +1,7 @@
 
 # tree-sitter-gdscript
 
-[简体中文](README.zh-CN.md)
+[中文简体](README.zh-CN.md)
 
 Improved fork of [prestonknopp/tree-sitter-gdscript](https://github.com/prestonknopp/tree-sitter-gdscript):
 
@@ -62,7 +62,7 @@ If the gdscript parser provided by nvim-treesitter is also installed, it will co
 
 ## License
 
-MIT
+This project is licensed under the [MIT License](LICENSE).
 
 ## Disclaimer
 

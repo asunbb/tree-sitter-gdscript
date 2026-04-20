@@ -1,7 +1,7 @@
 
 # tree-sitter-gdscript
 
-[英文](README.md)
+[English](README.md)
 
 基于 [prestonknopp/tree-sitter-gdscript](https://github.com/prestonknopp/tree-sitter-gdscript) 改进：
 
@@ -62,7 +62,7 @@ npm run format
 
 ## License
 
-MIT
+本项目基于 [MIT License](LICENSE) 开源。
 
 ## 免责声明
 
